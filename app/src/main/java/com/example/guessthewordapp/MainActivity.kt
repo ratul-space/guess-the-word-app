@@ -1,7 +1,9 @@
 package com.example.guessthewordapp
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -46,10 +48,36 @@ lateinit var btNext: Button
         //set the litener to the check button
         btCheck.setOnClickListener{
             if (etUserInput.toString().equals(day,ignoreCase = true)){
-                Toast.makeText(this@MainActivity, "You got it :)",Toast.LENGTH_SHORT).show()
+               val dialog = Dialog(this@MainActivity)
+                dialog.setContentView(R.layout.correct_dialog)
+                val bthide = dialog.findViewById<Button>(R.id.btConfirmDialog)
+                dialog.show()
+                bthide.setOnClickListener{
+                    dialog.dismiss()
+                    day = Days[random.nextInt(Days.size)]
+                    txtQuestionContainer.text = mixWords(day)
+                    etUserInput.setText("")
+                    txtCorrectAnswer.visibility = View.VISIBLE
+                    txtRightAnswer.visibility = View.VISIBLE
+                }
             }else{
                 Toast.makeText(this@MainActivity, "You failed :(",Toast.LENGTH_SHORT).show()
             }
+        }
+        //set the litener to the next button
+        btNext.setOnClickListener{
+            day = Days[random.nextInt(Days.size)]
+            txtQuestionContainer.text = mixWords(day)
+            etUserInput.setText("")
+            txtCorrectAnswer.visibility = View.VISIBLE
+            txtRightAnswer.visibility = View.VISIBLE
+        }
+        //set the listener to the show button
+        btShow.setOnClickListener{
+            txtCorrectAnswer.visibility = View.VISIBLE
+            txtRightAnswer.visibility = View.VISIBLE
+            // set the right answer the txtRightAnswer
+            txtRightAnswer.text = day
         }
     }
     fun mixWords(words: String): String {
