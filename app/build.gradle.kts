@@ -43,7 +43,7 @@ dependencies {
 
     // AndroidX equivalents for CardView and Design
     implementation("androidx.cardview:cardview:1.0.0")
-    implementation("androidx.coordinatorlayout:coordinatorlayout:1.2.0")
+    implementation("androidx.coordinatorlayout:coordinatorlayout:1.3.0")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.2.1")
